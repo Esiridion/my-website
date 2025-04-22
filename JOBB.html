@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Job Board</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #444;
+            padding: 10px;
+        }
+        nav button {
+            background: none;
+            border: none;
+            color: #ffffff;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        nav button:hover, .active-btn {
+            background: #666;
+        }
+        .section {
+            display: none; /* Hidden by default */
+            padding: 20px;
+            background: white;
+            margin: 20px 0;
+        }
+        .active {
+            display: block; /* Show only active section */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Online Job Board</h1>
+</header>
+
+<nav>
+    <button id="btn-job-search" onclick="showSection('job-search', this)">Job Search</button>
+    <button id="btn-employer-dashboard" onclick="showSection('employer-dashboard', this)">Employer Dashboard</button>
+    <button id="btn-job-seeker-dashboard" onclick="showSection('job-seeker-dashboard', this)">Job Seeker Dashboard</button>
+    <button id="btn-resources" onclick="showSection('resources', this)">Resources</button>
+</nav>
+
+<div class="container">
+    <div id="job-search" class="section">
+        <h2>Job Search</h2>
+        <p>Key Search | Location | Job Type | Company</p>
+    </div>
+    
+    <div id="employer-dashboard" class="section">
+        <h2>Employer Dashboard</h2>
+        <p>Post Jobs | Manage Applications</p>
+    </div>
+
+    <div id="job-seeker-dashboard" class="section">
+        <h2>Job Seeker Dashboard</h2>
+        <p>Save Jobs | Apply for Jobs | Upload Resume</p>
+    </div>
+
+    <div id="resources" class="section">
+        <h2>Resources</h2>
+        <p>Career Advice | Resume Tips</p>
+    </div>
+</div>
+
+<script>
+   
+        
+    function showSection(sectionId, button) {
+        // Hide all sections
+        let sections = document.querySelectorAll('.section');
+        sections.forEach(section => section.classList.remove('active'));
+
+        // Show only the clicked section
+        document.getElementById(sectionId).classList.add('active');
+
+        // Remove active-btn class from all buttons
+        let buttons = document.querySelectorAll('nav button');
+        buttons.forEach(btn => btn.classList.remove('active-btn'));
+
+        // Add active class to clicked button
+        button.classList.add('active-btn');
+    }
+</script>
+
+</body>
+</html>

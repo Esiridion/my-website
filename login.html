@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login Page</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .background {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-box {
+      background-color: #ffffff;
+      padding: 40px 30px;
+      border-radius: 10px;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    .input-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      outline: none;
+      transition: 0.3s ease;
+    }
+
+    .input-group input:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      background: #667eea;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    button:hover:enabled {
+      background: #5a67d8;
+    }
+
+    .register-text {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .register-text a {
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    .register-text a:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: red;
+      margin-bottom: 10px;
+    }
+
+    #waitBanner {
+      display: none;
+      color: #ff5555;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <div class="login-box">
+      <h2>Welcome Back</h2>
+      <form onsubmit="validateLogin(event)">
+        <div class="input-group">
+          <label for="email">Username</label>
+          <input type="text" id="email" name="email" required />
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+
+        <p id="errorMessage" class="error"></p>
+        <button id="loginButton" type="submit">Login</button>
+        <p id="waitBanner">Please wait 10 seconds before trying again.</p>
+        <p class="register-text">Don't have an account? <a href="#">Register</a></p>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    let loginAttempts = 0;
+    const correctEmail = 'admin123';
+    const correctPassword = 'admin123';
+
+    function validateLogin(event) {
+      event.preventDefault();
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('errorMessage');
+      const loginButton = document.getElementById('loginButton');
+      const waitBanner = document.getElementById('waitBanner');
+
+      errorMessage.textContent = '';
+
+      if (email === correctEmail && password === correctPassword) {
+        alert('Login successful');
+        window.location.href = "file:///D:/ESP/JOBB.html";
+      } else {
+        loginAttempts++;
+        errorMessage.textContent = 'Incorrect username or password.';
+        alert('Incorrect password. Please try again in 10 seconds.');
+
+        loginButton.disabled = true;
+        waitBanner.style.display = 'block';
+
+        setTimeout(() => {
+          loginButton.disabled = false;
+          loginAttempts = 0;
+          waitBanner.style.display = 'none';
+        }, 10000); // 10 seconds
+      }
+    }
+  </script>
+</body>
+</html>
